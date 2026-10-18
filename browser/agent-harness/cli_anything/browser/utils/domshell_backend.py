@@ -372,10 +372,11 @@ def _is_error(result: Any) -> bool:
     ``Error:`` prefix for any input that has been pre-stripped (e.g. by
     a transport layer) or that arrives without DOMShell's coloring.
     """
-    if hasattr(result, "isError") and result.isError:
+    # mcp 1.x exposes the flag as ``isError``; mcp 2.x renamed it ``is_error``.
+    if getattr(result, "isError", None) or getattr(result, "is_error", None):
         return True
     if isinstance(result, dict):
-        if result.get("isError") or result.get("error"):
+        if result.get("isError") or result.get("is_error") or result.get("error"):
             return True
 
     text = _extract_text(result)

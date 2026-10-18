@@ -34,7 +34,7 @@ setup(
     install_requires=[
         "click>=8.1,<9.0",
         "prompt-toolkit>=3.0,<4.0",
-        "mcp>=0.1.0,<1.0.0",
+        "mcp>=1.23.0,<3.0.0",
     ],
 
     extras_require={

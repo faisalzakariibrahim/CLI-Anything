@@ -594,6 +594,13 @@ def test_is_error_detects_isError_attribute():
     assert backend._is_error(SimpleNamespace(isError=False)) is False
 
 
+def test_is_error_detects_mcp2_is_error_attribute():
+    # mcp 2.x renamed CallToolResult.isError to is_error.
+    assert backend._is_error(SimpleNamespace(is_error=True)) is True
+    assert backend._is_error(SimpleNamespace(is_error=False)) is False
+    assert backend._is_error({"is_error": True}) is True
+
+
 def test_is_error_detects_dict_keys():
     assert backend._is_error({"isError": True}) is True
     assert backend._is_error({"error": "boom"}) is True
